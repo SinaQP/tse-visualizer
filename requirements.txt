@@ -1,0 +1,7 @@
+pandas
+numpy
+finpy-tse
+matplotlib
+arabic-reshaper
+python-bidi
+mplfinance
