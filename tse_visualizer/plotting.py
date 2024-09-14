@@ -35,5 +35,20 @@ def plot_candlestick_chart(symbol, start_date, end_date):
     )
 
     axlist[0].set_xlabel(reshape_persian_text('تاریخ'), fontproperties=font_prop)
+
+    # Interactive line drawing
+    lines = []
+
+    def on_click(event):
+        if event.inaxes == axlist[0]:  # Ensure the click is within the main candlestick chart
+            lines.append((event.xdata, event.ydata))
+            if len(lines) == 2:
+                x_values, y_values = zip(*lines)
+                axlist[0].plot(x_values, y_values, color='blue')
+                fig.canvas.draw()
+                lines.clear()
+
+    fig.canvas.mpl_connect('button_press_event', on_click)
+
     plt.savefig(f'charts/{symbol}_candlestick_chart_shamsi.png')
     plt.show()
