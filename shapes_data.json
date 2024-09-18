@@ -1,0 +1,14 @@
+[
+  {
+    "shape_type": "line",
+    "start_point": {"date": "1401-01-01", "price": 12000},
+    "end_point": {"date": "1401-01-20", "price": 12500},
+    "color": "blue"
+  },
+  {
+    "shape_type": "rectangle",
+    "start_point": {"date": "1401-02-01", "price": 12000},
+    "end_point": {"date": "1401-02-05", "price": 12500},
+    "color": "green"
+  }
+]

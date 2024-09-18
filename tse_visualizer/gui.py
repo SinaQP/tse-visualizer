@@ -1,6 +1,15 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from tse_visualizer.plotting import plot_candlestick_chart
+from tse_visualizer.utils import load_shapes_from_json
+from tkinter import filedialog  # For file dialog to load the JSON file
+
+# Function to load shapes from the JSON file and plot the chart with them
+def load_shapes_from_json_file(symbol, start_date, end_date):
+    file_path = filedialog.askopenfilename(filetypes=[("JSON files", "*.json")])
+    if file_path:
+        shapes_data = load_shapes_from_json(file_path)
+        plot_candlestick_chart(symbol, start_date, end_date, shapes_data)
 
 def on_submit(symbol_entry, start_date_entry, end_date_entry):
     symbol = symbol_entry.get().strip().upper()
@@ -11,7 +20,8 @@ def on_submit(symbol_entry, start_date_entry, end_date_entry):
         messagebox.showwarning("خطا در ورودی ها", "لطفا تمامی فیلد ها را کامل کنید")
         return
 
-    plot_candlestick_chart(symbol, start_date, end_date)
+    # Pass the entries to the load_shapes_from_json_file function for plotting
+    load_shapes_from_json_file(symbol, start_date, end_date)
 
 def create_main_window():
     root = tk.Tk()
@@ -35,6 +45,7 @@ def create_main_window():
     end_date_entry.grid(row=2, column=0)
     end_date_entry.insert(0, "1401-02-20")  # Default value
 
+    # The submit button will pass the entries to on_submit
     ttk.Button(frame, text="ثبت", command=lambda: on_submit(symbol_entry, start_date_entry, end_date_entry)).grid(row=3, column=0, columnspan=2, pady=10)
 
     root.columnconfigure(0, weight=1)

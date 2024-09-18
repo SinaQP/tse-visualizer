@@ -1,3 +1,5 @@
+import pandas as pd
+
 import finpy_tse as tse
 
 def fetch_stock_data(symbol, start_date, end_date):
